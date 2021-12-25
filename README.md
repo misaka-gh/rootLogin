@@ -13,3 +13,6 @@ wget https://cdn.jsdelivr.net/gh/Misaka-blog/rootLogin@master/root.sh && chmod -
 ## 相关教程
 
 待更新
+
+## 提醒事项
+IBM Linuxone请谨慎使用本脚本，否则有可能会封号
