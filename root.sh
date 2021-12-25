@@ -40,7 +40,7 @@ else
 apt update -y && apt install sudo -y
 fi	   
 else
-green " curl已安装，继续 "
+green "sudo已安装"
 fi
 
 sudo lsattr /etc/passwd /etc/shadow >/dev/null 2>&1
