@@ -20,3 +20,6 @@ IBM Linuxone请谨慎使用本脚本，否则有可能会封号
 ## 赞助我们
 
 ![afdian-MisakaNo.jpg](https://s2.loli.net/2021/12/25/SimocqwhVg89NQJ.jpg)
+
+## 交流群
+[Telegram](https://t.me/misakanetcn)
