@@ -4,6 +4,10 @@ green(){
     echo -e "\033[32m\033[01m$1\033[0m"
 }
 
+yellow(){
+    echo -e "\033[33m\033[01m$1\033[0m"
+}
+
 if [[ -f /etc/redhat-release ]]; then
 release="Centos"
 elif cat /etc/issue | grep -q -E -i "debian"; then
