@@ -4,6 +4,10 @@ green(){
     echo -e "\033[32m\033[01m$1\033[0m"
 }
 
+red(){
+    echo -e "\033[31m\033[01m$1\033[0m"
+}
+
 yellow(){
     echo -e "\033[33m\033[01m$1\033[0m"
 }
@@ -23,7 +27,7 @@ release="Ubuntu"
 elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
 release="Centos"
 else 
-red "不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统。请向作者反馈 https://github.com/kkkyg/CFwarp/issues"
+red "不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统。请向作者反馈 https://github.com/Misaka-blog/rootLogin/issues"
 rm -f root.sh
 exit 1
 fi
