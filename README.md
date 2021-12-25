@@ -4,7 +4,7 @@
 
 ## 运行并设置root密码
 
-首先使用`sudo -i`登录root用户（如果登录用户非root），然后执行以下命令
+首先使用`sudo -i`登录root用户（如果登录用户为非root时），然后执行以下命令
 
 ```shell
 wget https://cdn.jsdelivr.net/gh/Misaka-blog/rootLogin@master/root.sh && chmod -R 777 root.sh && bash root.sh
