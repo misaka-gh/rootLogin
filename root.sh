@@ -12,9 +12,6 @@ yellow(){
     echo -e "\033[33m\033[01m$1\033[0m"
 }
 
-# 必须以root运行脚本
-[[ $(id -u) != 0 ]] && red " ${T[${L}2]} " && exit 1
-
 if [[ -f /etc/redhat-release ]]; then
 release="Centos"
 elif cat /etc/issue | grep -q -E -i "debian"; then
@@ -40,7 +37,7 @@ yellow "检测到sudo未安装，安装中 "
 if [ $release = "Centos" ]; then
 yum -y update && yum install sudo -y
 else
-apt update -y && apt install sudo -y
+apt-get update -y && apt-get install sudo -y
 fi	   
 else
 green "sudo已安装"
