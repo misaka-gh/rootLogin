@@ -12,6 +12,9 @@ yellow(){
     echo -e "\033[33m\033[01m$1\033[0m"
 }
 
+# 必须以root运行脚本
+[[ $(id -u) != 0 ]] && red " ${T[${L}2]} " && exit 1
+
 if [[ -f /etc/redhat-release ]]; then
 release="Centos"
 elif cat /etc/issue | grep -q -E -i "debian"; then
