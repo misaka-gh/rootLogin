@@ -1,5 +1,11 @@
 #!/bin/bash
 
+REGEX=("debian" "ubuntu" "centos|red hat|kernel|oracle linux|alma|rocky" "'amazon linux'" "alpine")
+RELEASE=("Debian" "Ubuntu" "CentOS" "CentOS" "Alpine")
+PACKAGE_UPDATE=("apt -y update" "apt -y update" "yum -y update" "yum -y update" "apk update -f")
+PACKAGE_INSTALL=("apt -y install" "apt -y install" "yum -y install" "yum -y install" "apk add -f")
+CMD=("$(grep -i pretty_name /etc/os-release 2>/dev/null | cut -d \" -f2)" "$(hostnamectl 2>/dev/null | grep -i system | cut -d : -f2)" "$(lsb_release -sd 2>/dev/null)" "$(grep -i description /etc/lsb-release 2>/dev/null | cut -d \" -f2)" "$(grep . /etc/redhat-release 2>/dev/null)" "$(grep . /etc/issue 2>/dev/null | cut -d \\ -f1 | sed '/^[ ]*$/d')")
+
 green(){
     echo -e "\033[32m\033[01m$1\033[0m"
 }
@@ -12,43 +18,36 @@ yellow(){
     echo -e "\033[33m\033[01m$1\033[0m"
 }
 
-if [[ -f /etc/redhat-release ]]; then
-release="Centos"
-elif cat /etc/issue | grep -q -E -i "debian"; then
-release="Debian"
-elif cat /etc/issue | grep -q -E -i "ubuntu"; then
-release="Ubuntu"
-elif cat /etc/issue | grep -q -E -i "centos|red hat|redhat"; then
-release="Centos"
-elif cat /proc/version | grep -q -E -i "debian"; then
-release="Debian"
-elif cat /proc/version | grep -q -E -i "ubuntu"; then
-release="Ubuntu"
-elif cat /proc/version | grep -q -E -i "centos|red hat|redhat"; then
-release="Centos"
-else 
-red "不支持你当前系统，请选择使用Ubuntu,Debian,Centos系统。请向作者反馈 https://github.com/Misaka-blog/rootLogin/issues"
-rm -f root.sh
-exit 1
-fi
+[[ $EUID -ne 0 ]] && yellow "请在root用户下运行脚本" && exit 1
 
-if ! type sudo >/dev/null 2>&1; then 
-yellow "检测到sudo未安装，安装中 "
-if [ $release = "Centos" ]; then
-yum -y update && yum install sudo -y
-else
-apt-get update -y && apt-get install sudo -y
-fi	   
-else
-green "sudo已安装"
-fi
+for i in "${CMD[@]}"; do
+	SYS="$i" && [[ -n $SYS ]] && echo $SYS && break
+done
+
+for ((int=0; int<${#REGEX[@]}; int++)); do
+	[[ $(echo "$SYS" | tr '[:upper:]' '[:lower:]') =~ ${REGEX[int]} ]] && SYSTEM="${RELEASE[int]}" && [[ -n $SYSTEM ]] && break
+done
+
+[[ -z $SYSTEM ]] && red "不支持VPS的当前系统，请使用主流操作系统" && exit 1
+
+${PACKAGE_UPDATE[int]}
+${PACKAGE_INSTALL[int]} sudo
 
 sudo lsattr /etc/passwd /etc/shadow >/dev/null 2>&1
 sudo chattr -i /etc/passwd /etc/shadow >/dev/null 2>&1
 sudo chattr -a /etc/passwd /etc/shadow >/dev/null 2>&1
 sudo lsattr /etc/passwd /etc/shadow >/dev/null 2>&1
 
-green "VPS设置root密码登录脚本"
+clear
+red "=================================="
+echo "                           "
+red "    VPS一键修改root密码登录脚本     "
+red "          by 小御坂的破站           "
+echo "                           "
+red "  Site: https://owo.misaka.rest  "
+echo "                           "
+red "=================================="
+echo "                           "
 read -p "设置root密码:" password
 echo root:$password | sudo chpasswd root
 sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
