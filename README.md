@@ -1,8 +1,6 @@
-# 本脚本已集成至 Misaka-blog/MisakaLinuxToolbox 项目中，故本项目为纪念使用
-
 # SSH ROOT 用户密码登录设置脚本
 
-支持CentOS、Debian、Ubuntu的各大厂商的VPS，一个命令，把厂商的密钥登录或root限制给扬了！
+支持CentOS、Debian、Ubuntu等系统的各大厂商的VPS。一个命令，把厂商的密钥登录或root限制给扬了！
 
 ## 运行并设置root密码
 
