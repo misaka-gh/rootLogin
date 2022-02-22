@@ -18,8 +18,6 @@ yellow(){
     echo -e "\033[33m\033[01m$1\033[0m"
 }
 
-[[ $EUID -ne 0 ]] && yellow "请在root用户下运行脚本" && exit 1
-
 for i in "${CMD[@]}"; do
 	SYS="$i" && [[ -n $SYS ]] && echo $SYS && break
 done
@@ -29,9 +27,6 @@ for ((int=0; int<${#REGEX[@]}; int++)); do
 done
 
 [[ -z $SYSTEM ]] && red "不支持VPS的当前系统，请使用主流操作系统" && exit 1
-
-${PACKAGE_UPDATE[int]}
-${PACKAGE_INSTALL[int]} sudo
 
 sudo lsattr /etc/passwd /etc/shadow >/dev/null 2>&1
 sudo chattr -i /etc/passwd /etc/shadow >/dev/null 2>&1
