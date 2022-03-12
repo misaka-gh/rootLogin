@@ -27,7 +27,8 @@ for ((int=0; int<${#REGEX[@]}; int++)); do
 done
 
 [[ -z $SYSTEM ]] && red "不支持VPS的当前系统，请使用主流操作系统" && exit 1
-[[ -z $(type -P curl) ]] && ${PACKAGE_UPDATE[int]} && ${PACKAGE_INSTALL[int]} curl
+[[ ! -f /etc/ssh/sshd_config ]] && sudo ${PACKAGE_UPDATE[int]} && sudo ${PACKAGE_INSTALL[int]} openssh-server
+[[ -z $(type -P curl) ]] && sudo ${PACKAGE_UPDATE[int]} && sudo ${PACKAGE_INSTALL[int]} curl
 
 IP=$(curl -sm8 ip.sb)
 
@@ -41,10 +42,14 @@ read -p "输入即将设置的SSH端口（如未输入，默认22）：" sshport
 read -p "输入即将设置的root密码：" password
 [ -z $password ] && red "未检测输入，脚本即将退出" && exit 1
 echo root:$password | sudo chpasswd root
+
 sudo sed -i "s/^#\?Port.*/Port $sshport/g" /etc/ssh/sshd_config;
 sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
 sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config;
+
+sudo service ssh restart
 sudo service sshd restart
+
 yellow "VPS root登录信息设置完成！"
 green "VPS登录地址：$IP:$sshport"
 green "用户名：root"
