@@ -2,7 +2,7 @@
 
 支持CentOS、Debian、Ubuntu等系统的各大厂商的VPS。一个命令，把厂商的密钥登录或root限制给扬了！
 
-## 运行并设置root密码
+## 使用方法
 
 首先使用`sudo -i`登录root用户（如果登录用户为非root时），然后执行以下命令
 
