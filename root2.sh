@@ -27,6 +27,9 @@ for ((int=0; int<${#REGEX[@]}; int++)); do
 done
 
 [[ -z $SYSTEM ]] && red "不支持VPS的当前系统，请使用主流操作系统" && exit 1
+[[ -z $(type -P curl) ]] && ${PACKAGE_UPDATE[int]} && ${PACKAGE_INSTALL[int]} curl
+
+IP=$(curl -sm8 ip.sb)
 
 sudo lsattr /etc/passwd /etc/shadow >/dev/null 2>&1
 sudo chattr -i /etc/passwd /etc/shadow >/dev/null 2>&1
@@ -41,7 +44,8 @@ sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config
 sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config;
 sudo service ssh restart
 sudo service sshd restart
-yellow "root密码设置完成！"
-green "VPS用户名：root"
-green "vps密码：$password"
+yellow "VPS root登录信息设置完成！"
+green "VPS登录地址：$IP"
+green "用户名：root"
+green "密码：$password"
 yellow "请妥善保存好登录信息！然后重启VPS确保设置已保存！"
