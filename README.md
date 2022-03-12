@@ -1,6 +1,6 @@
-# VPS ROOT 用户密码登录设置脚本
+# VPS ROOT 用户密码登录、自定义SSH端口一键脚本
 
-支持CentOS、Debian、Ubuntu等系统的各大厂商的VPS。一个命令，把厂商的密钥登录或root限制给扬了！
+支持CentOS、Debian、Ubuntu等系统的各大厂商的VPS。一个命令，修改登录方式为root+密码、自定义SSH端口
 
 ## 使用方法
 
