@@ -36,10 +36,12 @@ sudo chattr -i /etc/passwd /etc/shadow >/dev/null 2>&1
 sudo chattr -a /etc/passwd /etc/shadow >/dev/null 2>&1
 sudo lsattr /etc/passwd /etc/shadow >/dev/null 2>&1
 
+read -p "输入即将设置的SSH端口（如未输入，默认22）：" sshport
+[ -z $sshport ] && sshport=22
 read -p "输入即将设置的root密码：" password
 [ -z $password ] && red "未检测输入，脚本即将退出" && exit 1
 echo root:$password | sudo chpasswd root
-sudo sed -i 's/^#\?Port.*/Port 22/g' /etc/ssh/sshd_config;
+sudo sed -i 's/^#\?Port.*/Port $sshport/g' /etc/ssh/sshd_config;
 sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
 sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config;
 sudo service ssh restart
