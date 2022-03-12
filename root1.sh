@@ -19,7 +19,7 @@ yellow(){
 }
 
 for i in "${CMD[@]}"; do
-	SYS="$i" && [[ -n $SYS ]] && echo $SYS && break
+	SYS="$i" && [[ -n $SYS ]] && break
 done
 
 for ((int=0; int<${#REGEX[@]}; int++)); do
