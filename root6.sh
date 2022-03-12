@@ -37,7 +37,7 @@ sudo chattr -a /etc/passwd /etc/shadow >/dev/null 2>&1
 sudo lsattr /etc/passwd /etc/shadow >/dev/null 2>&1
 
 read -p "输入即将设置的SSH端口（如未输入，默认22）：" sshport
-[ -z $sshport ] && sshport=22
+[ -z $sshport ] && red "端口未设置，将使用默认22端口" && sshport=22
 read -p "输入即将设置的root密码：" password
 [ -z $password ] && red "未检测输入，脚本即将退出" && exit 1
 echo root:$password | sudo chpasswd root
