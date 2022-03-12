@@ -44,7 +44,6 @@ echo root:$password | sudo chpasswd root
 sudo sed -i "s/^#\?Port.*/Port $sshport/g" /etc/ssh/sshd_config;
 sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
 sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config;
-sudo service ssh restart
 sudo service sshd restart
 yellow "VPS root登录信息设置完成！"
 green "VPS登录地址：$IP:$sshport"
