@@ -10,7 +10,7 @@
 wget -N https://raw.githubusercontents.com/Misaka-blog/rootLogin/master/root.sh && bash root.sh
 ```
 
-最后设置端口和密码即可
+最后设置SSH端口和密码即可
 
 ## 赞助我们
 
