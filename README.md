@@ -7,7 +7,7 @@
 首先使用`sudo -i`登录root用户（如果登录用户为非root时），然后执行以下命令
 
 ```shell
-wget -N https://raw.githubusercontents.com/Misaka-blog/rootLogin/master/root.sh && bash root.sh
+wget -N --no-check-certificate https://raw.githubusercontents.com/Misaka-blog/rootLogin/master/root.sh && bash root.sh
 ```
 
 最后设置SSH端口和密码即可
