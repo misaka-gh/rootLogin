@@ -44,8 +44,8 @@ read -p "输入即将设置的root密码：" password
 echo root:$password | sudo chpasswd root
 
 sudo sed -i "s/^#\?Port.*/Port $sshport/g" /etc/ssh/sshd_config;
-sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin yes/g' /etc/ssh/sshd_config;
-sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g' /etc/ssh/sshd_config;
+sudo sed -i "s/^#\?PermitRootLogin.*/PermitRootLogin yes/g" /etc/ssh/sshd_config;
+sudo sed -i "s/^#\?PasswordAuthentication.*/PasswordAuthentication yes/g" /etc/ssh/sshd_config;
 
 sudo service ssh restart
 sudo service sshd restart
