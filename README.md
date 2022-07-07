@@ -7,7 +7,7 @@
 ## 使用方法
 
 ```shell
-wget -N --no-check-certificate https://raw.githubusercontents.com/Misaka-blog/rootLogin/master/root.sh && bash root.sh
+wget -N --no-check-certificate https://raw.githubusercontent.com/misaka-gh/rootLogin/master/root.sh && bash root.sh
 ```
 
 然后设置SSH端口和密码即可
